@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Notification</string>
+    <string name="default_notification_channel_id">Notification</string>
+    <string name="topic">All</string>
+    <string name="subscribe">subscribe</string>
+    <string name="unsubscribe">unsubscribe</string>
+
+    <!-- format -->
+    <string name="msg_google_play_services_check">Check Google Play Services %s</string>
+    <string name="msg_succeeded">%s %s</string>
+    <string name="msg_failed">Failed to %s %s, %s</string>
+</resources>
