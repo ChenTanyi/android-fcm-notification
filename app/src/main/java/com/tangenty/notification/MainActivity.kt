@@ -18,10 +18,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         intent.extras?.let {
+            var message = ""
             for (key in it.keySet()) {
                 val value = intent.extras?.get(key)
-                Log.d(TAG, "Key: $key Value: $value")
+                message += "$value\n"
+                Log.d(TAG, "[Extras] Key: $key Value: $value")
             }
+            binding.message.text = message
         }
 
         checkGooglePlayServices()

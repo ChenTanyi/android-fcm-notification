@@ -19,16 +19,20 @@ class MessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         val title = "${remoteMessage.notification?.title}"
         val body = "${remoteMessage.notification?.body}"
-        Log.d(TAG, "Notification -- ${remoteMessage.from} -> ${remoteMessage.to}: [$title] $body")
-        sendNotification(title, body)
 
+        Log.d(TAG, "Notification -- ${remoteMessage.from} -> ${remoteMessage.to}: [$title] $body")
         if (remoteMessage.data.isNotEmpty()) {
             Log.d(TAG, "Message data payload: ${remoteMessage.data}")
         }
+
+        sendNotification(title, body, remoteMessage.data)
     }
 
-    private fun sendNotification(title: String, body: String) {
+    private fun sendNotification(title: String, body: String, extras: Map<String, String>) {
         val intent = Intent(this, MainActivity::class.java)
+        for (extra in extras) {
+            intent.putExtra(extra.key, extra.value)
+        }
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
 
